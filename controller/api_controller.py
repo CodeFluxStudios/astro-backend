@@ -22,15 +22,21 @@ def getGuilds():
         return redirect(url_for('login.loginAction'))
 
 @apiController.route('/guilds/admin')
-def getGuild(serverid):
-    print(serverid)
+def getGuild():
+    print()
     if 'token' in session:   
         sess = requests.Session()
         sess.headers.update({'Authorization': 'Bearer ' + session['token']})
-        print(config['Discord']['endpoint'] + 'guilds/' + serverid)
-        print(session["token"])
-        r = sess.get(config['Discord']['endpoint'] + 'guilds/' + serverid)
-        return str(r.text)
+
+        r = sess.get(config['Discord']['endpoint'] + 'users/@me/guilds')
+        responseJson = json.loads(r.text)
+        adminServers = []
+        for server in responseJson:
+            permssions = server["permissions"]
+            admin = permssions & 8
+            if admin == 8:
+                adminServers.append(server)
+        return str(adminServers)
     else:
         return redirect(url_for('login.loginAction'))
 
