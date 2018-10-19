@@ -16,7 +16,7 @@ loginController = Blueprint('login', __name__, url_prefix='')
 def loginAction():
     state = randint(100000, 999999)
     return redirect('https://discordapp.com/oauth2/authorize?response_type=code&client_id=' + 
-    config['BotData']['BotId'] + '&scope=identify email connections guilds&state=' + str(state) + '&redirect_uri=' + config['Server']['baseurl'] + ':' + config['Server']['port'] + '/callback')
+    config['BotData']['BotId'] + '&scope=identify email connections guilds&state=' + str(state) + '&redirect_uri=' + config['Server']['baseurl'] + ':' + config['Server']['port'] + '/dashboard')
     
 
 @loginController.route('/session')
