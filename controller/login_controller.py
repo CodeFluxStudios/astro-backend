@@ -25,7 +25,7 @@ def sessionAction():
         return 'Logged in as %s' % (session['token'])
     return 'You are not logged in'
 
-@loginController.route('/callback')
+@loginController.route('/dashboard')
 def callbackAction():
     code = request.args.get('code')
     data = {
