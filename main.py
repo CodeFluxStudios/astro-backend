@@ -1,7 +1,9 @@
 
 from controller.login_controller import loginController
 from controller.api_controller import apiController
+from controller.index_controller import indexController
 from flask import (app, Flask)
+from flask import send_from_directory
 import os
 import configparser
 
@@ -10,10 +12,11 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 #Configure app
-app = Flask(__name__)
+app = Flask(__name__, static_folder='view')
 app.register_blueprint(loginController)
 app.register_blueprint(apiController)
-app.secret_key = config['Security']['SecretKey']
+app.register_blueprint(indexController)
 
+app.secret_key = config['Security']['SecretKey']
 #Run app
 app.run()

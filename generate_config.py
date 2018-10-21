@@ -18,6 +18,7 @@ config['Discord']['DiscordToken'] = 'oauth2/token'
 config['BotData'] = {}
 config['BotData']['BotId'] = 'BotIdHere'
 config['BotData']['BotSecret'] = 'BotSecretHere'
+config['BotData']['BotToken'] = 'BotTokenHere'
 
 with open('config.ini', 'w') as configfile:
     config.write(configfile)

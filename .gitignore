@@ -1,3 +1,6 @@
 
 *.pyc
 config.ini
+
+view/*
+view/index.html
