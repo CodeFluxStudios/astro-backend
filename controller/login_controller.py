@@ -41,16 +41,23 @@ def callbackAction():
         'Content-Type': 'application/x-www-form-urlencoded'
     }
     r = requests.post(config['Discord']['endpoint'] + config['Discord']['token'], data, headers)
-    r.raise_for_status()
-    jsonData = r.json()
-    session['token'] = jsonData["access_token"]
+    jsonData = {}
+    try:
+        r.raise_for_status()
+        jsonData = r.json()
+        session['token'] = jsonData["access_token"]
 
-    #Return JSON-Userdata to template
-    sess = requests.Session()
-    sess.headers.update({'Authorization': 'Bearer ' + session['token']})
-    r = sess.get(config['Discord']['endpoint'] + 'users/@me')
+        #Return JSON-Userdata to template
+        sess = requests.Session()
+        sess.headers.update({'Authorization': 'Bearer ' + session['token']})
+        r = sess.get(config['Discord']['endpoint'] + 'users/@me')
+        print("oof")
 
-    return render_template('/backend/callback.html', response=r.json())
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 401:
+            jsonData = {'code': 401, 'message': 'Unauthorized. Wrong code?'}
+
+    return render_template('/backend/callback.html', response=jsonData)
 
 @loginController.route('/logout')
 def logoutAction():
