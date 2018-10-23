@@ -44,13 +44,14 @@ def callbackAction():
     jsonData = {}
     try:
         r.raise_for_status()
-        jsonData = r.json()
-        session['token'] = jsonData["access_token"]
+        accessJson = r.json()
+        session['token'] = accessJson["access_token"]
 
         #Return JSON-Userdata to template
         sess = requests.Session()
         sess.headers.update({'Authorization': 'Bearer ' + session['token']})
         r = sess.get(config['Discord']['endpoint'] + 'users/@me')
+        jsonData = r.json()
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 401:
             jsonData = {'code': 401, 'message': 'Unauthorized. Wrong code?'}
