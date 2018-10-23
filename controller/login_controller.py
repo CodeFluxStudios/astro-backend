@@ -27,6 +27,7 @@ def sessionAction():
 
 @loginController.route('/callback')
 def callbackAction():
+    # Authorize to servers
     code = request.args.get('code')
     data = {
         'client_id': config['BotData']['BotId'],
@@ -43,7 +44,13 @@ def callbackAction():
     r.raise_for_status()
     jsonData = r.json()
     session['token'] = jsonData["access_token"]
-    return render_template('/backend/callback.html', response=jsonData)
+
+    #Return JSON-Userdata to template
+    sess = requests.Session()
+    sess.headers.update({'Authorization': 'Bearer ' + session['token']})
+    r = sess.get(config['Discord']['endpoint'] + 'users/@me')
+
+    return render_template('/backend/callback.html', response=r.json())
 
 @loginController.route('/logout')
 def logoutAction():
