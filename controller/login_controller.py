@@ -51,8 +51,6 @@ def callbackAction():
         sess = requests.Session()
         sess.headers.update({'Authorization': 'Bearer ' + session['token']})
         r = sess.get(config['Discord']['endpoint'] + 'users/@me')
-        print("oof")
-
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 401:
             jsonData = {'code': 401, 'message': 'Unauthorized. Wrong code?'}

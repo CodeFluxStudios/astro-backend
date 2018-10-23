@@ -13,7 +13,7 @@ config['Server']['port'] = '5000'
 
 config['Discord'] = {}
 config['Discord']['Endpoint'] = 'https://discordapp.com/api/'
-config['Discord']['DiscordToken'] = 'oauth2/token'
+config['Discord']['token'] = 'oauth2/token'
 
 config['BotData'] = {}
 config['BotData']['BotId'] = 'BotIdHere'
