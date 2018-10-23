@@ -1,10 +1,12 @@
-<!doctype html>
-<title>Callback</title>
-Callback
-<script>
-    json = {{ response|tojson }}
-    window.opener.postMessage(
-        json,
-        'http://localhost:5000'
-    )
-</script>
+<html>
+<head>
+    <script>
+        json = {{ response | tojson }}
+        window.opener.postMessage(
+            json,
+            'http://localhost:5000'
+        );
+        setTimeout(function () { window.close(); }, 500);
+    </script>
+</head>
+</html>
