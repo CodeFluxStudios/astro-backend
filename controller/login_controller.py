@@ -10,7 +10,7 @@ from random import randint
 config = configparser.ConfigParser()
 config.read('config.ini')
 
-loginController = Blueprint('login', __name__, url_prefix='')
+loginController = Blueprint('login', __name__, url_prefix='', template_folder='../view')
 
 @loginController.route('/login')
 def loginAction():
@@ -43,7 +43,7 @@ def callbackAction():
     r.raise_for_status()
     jsonData = r.json()
     session['token'] = jsonData["access_token"]
-    return str(jsonData)
+    return render_template('/backend/callback.html', response=jsonData)
 
 @loginController.route('/logout')
 def logoutAction():

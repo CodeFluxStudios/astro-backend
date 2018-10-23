@@ -1,6 +1,17 @@
 
 *.pyc
 config.ini
-
-view/*
-view/index.html
+view/vendor.js.map
+view/styles.js.map
+view/vendor.js
+view/styles.js
+view/runtime.js.map
+view/runtime.js
+view/polyfills.js.map
+view/polyfills.js
+view/main.js.map
+view/main.js
+view/favicon.ico
+view/assets/question-mark-placeholder.png
+view/assets/discord-logo.svg
+view/3rdpartylicenses.txt

@@ -45,6 +45,7 @@ def getGuild(id):
     if 'token' in session:   
         sess = requests.Session()
         sess.headers.update({'Authorization': 'Bot ' + config['BotData']['bottoken']})
+        print(config['BotData']['bottoken'])
         r = sess.get(config['Discord']['endpoint'] + 'guilds/' + id)
         return str(r.text)
     else:
