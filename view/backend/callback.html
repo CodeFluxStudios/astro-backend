@@ -4,7 +4,7 @@
         json = {{ response | tojson }}
         window.opener.postMessage(
             json,
-            'http://localhost:5000'
+            'http://lvh.me:5000'
         );
         setTimeout(function () { window.close(); }, 500);
     </script>
