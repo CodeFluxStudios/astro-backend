@@ -17,6 +17,6 @@ app.register_blueprint(loginController)
 app.register_blueprint(apiController)
 app.register_blueprint(indexController)
 
-app.secret_key = config['Security']['SecretKey']
+app.secret_key = config['Security']['secretkey']
 #Run app
 app.run()

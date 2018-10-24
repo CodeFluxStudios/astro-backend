@@ -17,7 +17,7 @@ def getGuilds():
         sess = requests.Session()
         sess.headers.update({'Authorization': 'Bearer ' + session['token']})
         r = sess.get(config['Discord']['endpoint'] + 'users/@me/guilds')
-        return str(r.text)
+        return str(json.dumps(r.json()))
     else:
         return redirect(url_for('login.loginAction'))
 
@@ -36,7 +36,7 @@ def getAdminGuilds():
             admin = permssions & 8
             if admin == 8:
                 adminServers.append(server)
-        return str(adminServers)
+        return str(json.dumps(adminServers))
     else:
         return redirect(url_for('login.loginAction'))
 
@@ -45,9 +45,9 @@ def getGuild(id):
     if 'token' in session:   
         sess = requests.Session()
         sess.headers.update({'Authorization': 'Bot ' + config['BotData']['bottoken']})
-        print(config['BotData']['bottoken'])
+        print(config['BotData']['token'])
         r = sess.get(config['Discord']['endpoint'] + 'guilds/' + id)
-        return str(r.text)
+        return str(json.dumps(r.json()))
     else:
         return redirect(url_for('login.loginAction'))
 
@@ -57,6 +57,6 @@ def getUser():
         sess = requests.Session()
         sess.headers.update({'Authorization': 'Bearer ' + session['token']})
         r = sess.get(config['Discord']['endpoint'] + 'users/@me')
-        return str(r.text)
+        return str(json.dumps(r.json()))
     else:
         return redirect(url_for('login.loginAction'))
