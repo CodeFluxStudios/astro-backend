@@ -23,11 +23,11 @@ def getGuild(id):
         return Unauthorized
 
 
-@botController.route('/guilds/<id>', methods=['POST'])
+@botController.route('/guilds/oauth/<id>', methods=['GET'])
 def joinGuild(id):
     if 'token' in session:   
         state = randint(100000, 999999)
-        return redirect(discord.generateAuthorizationUrl(config['Server']['baseurl'] + ':' + config['Server']['port'] + '/api/bot/guilds/callback', 'bot', state, 'guild_id=' + id + '&permissions=2146958839'))
+        return  redirect(discord.generateAuthorizationUrl(config['Server']['baseurl'] + ':' + config['Server']['port'] + '/api/bot/guilds/callback', 'bot', state, 'guild_id=' + id + '&permissions=2146958839'))
     else:
         return Unauthorized
 
