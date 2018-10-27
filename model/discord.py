@@ -1,7 +1,8 @@
 import requests
 import json
 from model.standard_responses import (UnauthorizedJson, ForbiddenJson)
-
+from model.user import User
+from model.bot import Bot
 class Discord:
 
     def __init__(self, id, secret, token, endpoint = 'https://discordapp.com/api/'):
@@ -58,6 +59,12 @@ class Discord:
 
         requestJson = json.dumps(request.json())
         return (requestJson)
+
+    def getUser(self,token):
+        return User(token)
+
+    def getBot(self):
+        return Bot(self.token)
     
     def generateAuthorizationUrl(self, redirect_uri, scopes, state, addition = ''):
             return str('https://discordapp.com/oauth2/authorize?response_type=code&client_id=' + 

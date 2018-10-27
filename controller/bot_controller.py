@@ -1,7 +1,7 @@
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
-from model.standard_responses import (Unauthorized, StandardResponse, getAuthenticationJson, UnauthorizedJson, MissingAccessJson)
+from model.standard_responses import (Unauthorized, StandardResponse, getAuthenticationJson, UnauthorizedJson, MissingAccessJson, MissingAccess)
 import requests
 import configparser
 import json
@@ -17,8 +17,11 @@ discord = Discord(config['BotData']['id'], config['BotData']['secret'], config['
 @botController.route('/guilds/<id>', methods=['GET'])
 def getGuild(id):
     if 'token' in session:   
-        response = discord.getBotResource('guilds/' + id)
-        return StandardResponse(response)
+        response = discord.getBot().getGuild(id)
+        if response is None:
+            return MissingAccess
+
+        return StandardResponse(json.dumps(response.__dict__))
     else:
         return Unauthorized
 

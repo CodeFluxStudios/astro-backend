@@ -41,6 +41,8 @@ def getAdminGuilds():
             permssions = server["permissions"]
             admin = permssions & 8
             if admin == 8:
+                joined = { "bot_joined": discord.getBot().getBotJoinedGuild(server["id"])}
+                server.update(joined)
                 adminServers.append(server)
 
         requestJson = json.dumps(adminServers)

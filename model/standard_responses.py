@@ -11,6 +11,7 @@ MissingAccessJson = { "error": 50001,
 
 Unauthorized = json.dumps(UnauthorizedJson), 401
 Forbidden = json.dumps(ForbiddenJson), 403
+MissingAccess = json.dumps(MissingAccessJson), 200
 
 
 class StandardResponse(Response):
